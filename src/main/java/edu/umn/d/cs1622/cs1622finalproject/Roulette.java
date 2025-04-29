@@ -13,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
@@ -51,9 +52,12 @@ public class Roulette extends CasinoGame {
         root.setTop(topBox);
         BorderPane.setMargin(topBox, new Insets(0, 0, 20, 0));
 
-        wheel = new Circle(100);
-        wheel.setFill(Color.GREEN);
+
+        wheel = new Circle(200, 200, 150);
+        wheel.setFill(Color.SADDLEBROWN);
         wheel.setStroke(Color.BLACK);
+        wheel.setStrokeWidth(5);
+        wheel.getStrokeDashArray().addAll(20.0, 10.0);
 
         VBox centerBox = new VBox(20);
         centerBox.setAlignment(Pos.CENTER);
@@ -135,6 +139,51 @@ public class Roulette extends CasinoGame {
     }
 
     private void spinWheel() {
+        if (selectedNumber == -1) {
+            resultLabel.setText("Please select a number first!");
+            return;
+        }
+
+        try {
+            int betAmount = Integer.parseInt(betAmtField.getText());
+
+            if (betAmount <= 0) {
+                resultLabel.setText("Bet amount must be positive!");
+                return;
+            }
+
+            if (!player.placeBet(betAmount)) {
+                resultLabel.setText("Insufficient funds!");
+                return;
+            }
+
+            balanceLabel.setText("Balance: $" + player.getBalance());
+
+            // Wheel spinner
+            RotateTransition rotateTransition = new RotateTransition(Duration.seconds(3), wheel);
+            rotateTransition.setByAngle(1080);
+            rotateTransition.setCycleCount(1);
+            rotateTransition.setOnFinished(event -> calculateWinLoss(betAmount));
+            rotateTransition.play();
+
+            resultLabel.setText("Spinning...");
+        } catch (NumberFormatException e) {
+            resultLabel.setText("Please enter a valid bet amount!");
+        }
+    }
+
+    private void calculateWinLoss(int betAmount) {
+        int result = random.nextInt(37);
+
+        if (result == selectedNumber) {
+            int winnings = betAmount * 35 + betAmount;
+            player.addWinnings(winnings);
+            resultLabel.setText("You won! Result: " + result + " - Winnings: $" + winnings);
+        } else {
+            resultLabel.setText("Sorry, you lost. Result: " + result);
+        }
+
+        balanceLabel.setText("Balance: $" + player.getBalance());
     }
 }
 
