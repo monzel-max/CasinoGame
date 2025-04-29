@@ -83,14 +83,58 @@ public class Roulette extends CasinoGame {
         BorderPane.setMargin(bottomControls, new Insets(20, 0, 0, 0));
 
 
-        return new Scene(root, 600, 500);
+        return new Scene(root, 600, 700);
     }
 
     private GridPane createBettingGrid() {
-        return null;
+        GridPane grid = new GridPane();
+        grid.setHgap(5);
+        grid.setVgap(5);
+        grid.setPadding(new Insets(20));
+
+        final int zeroNumber = 0;
+        Button zeroBtn = new Button(String.valueOf(zeroNumber));
+        zeroBtn.setPrefWidth(160); // Make it span the width of 3 columns + gaps
+        zeroBtn.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+        zeroBtn.setOnAction(e -> {
+            selectedNumber = zeroNumber;
+            resultLabel.setText("Selected: " + zeroNumber);
+        });
+
+        GridPane.setColumnSpan(zeroBtn, 3);
+        grid.add(zeroBtn, 0, 0);
+
+        int col = 0;
+        int row = 1;
+
+        // Create buttons for numbers 0-36
+        for (int i = 1; i <= 36; i++) {
+            final int number = i;
+            Button btn = new Button(String.valueOf(i));
+            btn.setPrefWidth(50);
+
+            // Set button color based on roulette rules
+            if (i % 2 == 0) {
+                btn.setStyle("-fx-background-color: black; -fx-text-fill: white;");
+            } else {
+                btn.setStyle("-fx-background-color: red; -fx-text-fill: white;");
+            }
+
+            btn.setOnAction(e -> {
+                selectedNumber = number;
+                resultLabel.setText("Selected: " + number);
+            });
+            grid.add(btn, col, row);
+            col++;
+            if (col == 3) {
+                col = 0;
+                row++;
+            }
+        }
+        return grid;
     }
 
     private void spinWheel() {
-
     }
 }
+
