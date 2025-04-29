@@ -37,6 +37,7 @@ public class Roulette extends CasinoGame {
         BorderPane root = new BorderPane();
         root.setPadding(new Insets(20));
 
+        //Top part of scene with title and balance
         VBox topBox = new VBox(10);
         topBox.setAlignment(Pos.CENTER);
 
@@ -52,7 +53,7 @@ public class Roulette extends CasinoGame {
         root.setTop(topBox);
         BorderPane.setMargin(topBox, new Insets(0, 0, 20, 0));
 
-
+        // Creates the simple little wheel (idk how to put numbers on it)
         wheel = new Circle(200, 200, 150);
         wheel.setFill(Color.SADDLEBROWN);
         wheel.setStroke(Color.BLACK);
@@ -64,9 +65,11 @@ public class Roulette extends CasinoGame {
         centerBox.getChildren().add(wheel);
         root.setCenter(centerBox);
 
+        // Right side of scene (betting grid)
         GridPane numberGrid = createBettingGrid();
         root.setRight(numberGrid);
 
+        // Bottom side of scene (betting controls)
         VBox bottomControls = new VBox(15);
         bottomControls.setAlignment(Pos.CENTER);
 
@@ -90,15 +93,17 @@ public class Roulette extends CasinoGame {
         return new Scene(root, 600, 700);
     }
 
+    // The 0-36 Betting grid full of buttons to bet (Cant do anything besides singular bets currently)
     private GridPane createBettingGrid() {
         GridPane grid = new GridPane();
         grid.setHgap(5);
         grid.setVgap(5);
         grid.setPadding(new Insets(20));
 
+        // Handles the green zero so that its separate from the grid 1-36 matrix
         final int zeroNumber = 0;
         Button zeroBtn = new Button(String.valueOf(zeroNumber));
-        zeroBtn.setPrefWidth(160); // Make it span the width of 3 columns + gaps
+        zeroBtn.setPrefWidth(160);
         zeroBtn.setStyle("-fx-background-color: green; -fx-text-fill: white;");
         zeroBtn.setOnAction(e -> {
             selectedNumber = zeroNumber;
@@ -111,13 +116,13 @@ public class Roulette extends CasinoGame {
         int col = 0;
         int row = 1;
 
-        // Create buttons for numbers 0-36
+        // Create buttons for numbers 1-36
         for (int i = 1; i <= 36; i++) {
             final int number = i;
             Button btn = new Button(String.valueOf(i));
             btn.setPrefWidth(50);
 
-            // Set button color based on roulette rules
+            // Set button color based on roulette rules (black for evens, red for odds)
             if (i % 2 == 0) {
                 btn.setStyle("-fx-background-color: black; -fx-text-fill: white;");
             } else {
@@ -165,14 +170,16 @@ public class Roulette extends CasinoGame {
             rotateTransition.setCycleCount(1);
             rotateTransition.setOnFinished(event -> calculateWinLoss(betAmount));
             rotateTransition.play();
-
             resultLabel.setText("Spinning...");
+
+            // Stops the code from bugging out when non-number is inputted
         } catch (NumberFormatException e) {
             resultLabel.setText("Please enter a valid bet amount!");
         }
     }
 
     private void calculateWinLoss(int betAmount) {
+        //Random number simulating 0-36 on the roulette table
         int result = random.nextInt(37);
 
         if (result == selectedNumber) {

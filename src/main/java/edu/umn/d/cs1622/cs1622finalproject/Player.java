@@ -1,5 +1,6 @@
 package edu.umn.d.cs1622.cs1622finalproject;
 
+//Player class that mainly handles your players balance across the casino
 public class Player {
     private int balance;
 

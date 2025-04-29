@@ -28,6 +28,7 @@ public class Casino extends Application {
 
     @Override
     public void start(Stage mainStage) throws IOException {
+        //Starts the player off at the casino scene and with $1000
         this.mainStage = mainStage;
         this.player = new Player(1000);
 
