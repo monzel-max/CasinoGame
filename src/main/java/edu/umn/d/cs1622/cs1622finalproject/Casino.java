@@ -2,7 +2,16 @@ package edu.umn.d.cs1622.cs1622finalproject;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -29,6 +38,47 @@ public class Casino extends Application {
     }
 
     private void casinoHubScene() {
+        BorderPane root = new BorderPane();
+        root.setPadding(new Insets(20));
+
+        Label titleLabel = new Label("Casino");
+        titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+        root.setTop(titleLabel);
+        BorderPane.setAlignment(titleLabel, Pos.CENTER);
+        BorderPane.setMargin(titleLabel, new Insets(0, 0, 20, 0));
+
+        VBox gameSelection = new VBox(15);
+        gameSelection.setAlignment(Pos.CENTER);
+
+        Label selectGameLabel = new Label("Select a game:");
+        selectGameLabel.setFont(Font.font("Arial", FontWeight.NORMAL, 18));
+
+        Button rouletteBtn = new Button("Roulette");
+        rouletteBtn.setPrefWidth(200);
+        rouletteBtn.setOnAction(e -> openRouletteGame());
+
+        Button slotMachineBtn = new Button("Slot Machine");
+        slotMachineBtn.setPrefWidth(200);
+
+        Button blackjackBtn = new Button("Blackjack");
+        blackjackBtn.setPrefWidth(200);
+
+        gameSelection.getChildren().addAll(selectGameLabel, rouletteBtn, slotMachineBtn, blackjackBtn);
+        root.setCenter(gameSelection);
+
+        HBox playerInfo = new HBox(15);
+        playerInfo.setAlignment(Pos.CENTER);
+
+        Label playerNameLabel = new Label("Player: " + player.getName());
+        Label balanceLabel = new Label("Balance: $" + player.getBalance());
+
+        playerInfo.getChildren().addAll(playerNameLabel, balanceLabel);
+        root.setBottom(playerInfo);
+        BorderPane.setMargin(playerInfo, new Insets(20, 0, 0, 0));
+
+        hub = new Scene(root, 500, 400);
+    }
+    private void openRouletteGame() {
 
     }
 
