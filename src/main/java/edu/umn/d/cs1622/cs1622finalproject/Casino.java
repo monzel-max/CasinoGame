@@ -7,6 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -79,7 +80,21 @@ public class Casino extends Application {
         hub = new Scene(root, 500, 400);
     }
     private void openRouletteGame() {
+        Roulette roulette = new Roulette(player);
+        Scene rouletteScene = roulette.gameScene();
 
+        Button backToHubBtn = new Button("Back To Hub");
+        backToHubBtn.setOnAction(e -> {
+            casinoHubScene();
+            mainStage.setScene(hub);
+        });
+
+        ((BorderPane)rouletteScene.getRoot()).setBottom(backToHubBtn);
+        BorderPane.setAlignment(backToHubBtn, Pos.CENTER);
+        BorderPane.setMargin(backToHubBtn, new Insets(15, 0, 0, 0));
+
+        mainStage.setScene(rouletteScene);
+        mainStage.setTitle("Roulette");
     }
 
 }
