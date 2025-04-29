@@ -1,13 +1,11 @@
 package edu.umn.d.cs1622.cs1622finalproject;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -27,7 +25,7 @@ public class Casino extends Application {
     }
 
     @Override
-    public void start(Stage mainStage) throws IOException {
+    public void start(Stage mainStage) {
         //Starts the player off at the casino scene and with $1000
         this.mainStage = mainStage;
         this.player = new Player(1000);
