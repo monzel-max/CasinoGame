@@ -42,12 +42,14 @@ public class Casino extends Application {
         BorderPane root = new BorderPane();
         root.setPadding(new Insets(20));
 
+        //Top section showing the title
         Label titleLabel = new Label("Casino");
         titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
         root.setTop(titleLabel);
         BorderPane.setAlignment(titleLabel, Pos.CENTER);
         BorderPane.setMargin(titleLabel, new Insets(0, 0, 20, 0));
 
+        // Middle section showing the selection of games
         VBox gameSelection = new VBox(15);
         gameSelection.setAlignment(Pos.CENTER);
 
@@ -67,6 +69,7 @@ public class Casino extends Application {
         gameSelection.getChildren().addAll(selectGameLabel, rouletteBtn, slotMachineBtn, blackjackBtn);
         root.setCenter(gameSelection);
 
+        //Bottom section showing balance info
         HBox playerInfo = new HBox(15);
         playerInfo.setAlignment(Pos.CENTER);
 
@@ -82,6 +85,7 @@ public class Casino extends Application {
         Roulette roulette = new Roulette(player);
         Scene rouletteScene = roulette.gameScene();
 
+        //Button at the bottom of the screen to get back to the main hub
         Button backToHubBtn = new Button("Back To Hub");
         backToHubBtn.setOnAction(e -> {
             casinoHubScene();
