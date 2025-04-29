@@ -86,16 +86,18 @@ public class Casino extends Application {
         Scene rouletteScene = roulette.gameScene();
 
         //Button at the bottom of the screen to get back to the main hub
-        Button backToHubBtn = new Button("Back To Hub");
+        BorderPane root = (BorderPane) rouletteScene.getRoot();
+        VBox bottomControls = (VBox) root.getBottom();
+
+        Button backToHubBtn = new Button("Back to Hub");
         backToHubBtn.setOnAction(e -> {
+            // Update player balance in hub
             casinoHubScene();
             mainStage.setScene(hub);
         });
 
-        ((BorderPane)rouletteScene.getRoot()).setBottom(backToHubBtn);
-        BorderPane.setAlignment(backToHubBtn, Pos.CENTER);
-        BorderPane.setMargin(backToHubBtn, new Insets(15, 0, 0, 0));
-
+        // Add the back button to the bottom controls
+        bottomControls.getChildren().add(backToHubBtn);
         mainStage.setScene(rouletteScene);
         mainStage.setTitle("Roulette");
     }
