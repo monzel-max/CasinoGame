@@ -1,16 +1,10 @@
 package edu.umn.d.cs1622.cs1622finalproject;
 
 public class Player {
-    private String name;
     private int balance;
 
-    public Player(String name, int startingBalance) {
-        this.name = name;
+    public Player(int startingBalance) {
         this.balance = startingBalance;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public int getBalance() {

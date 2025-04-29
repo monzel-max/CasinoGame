@@ -29,7 +29,7 @@ public class Casino extends Application {
     @Override
     public void start(Stage mainStage) throws IOException {
         this.mainStage = mainStage;
-        this.player = new Player("Player", 1000);
+        this.player = new Player(1000);
 
         casinoHubScene();
 
@@ -70,10 +70,9 @@ public class Casino extends Application {
         HBox playerInfo = new HBox(15);
         playerInfo.setAlignment(Pos.CENTER);
 
-        Label playerNameLabel = new Label("Player: " + player.getName());
         Label balanceLabel = new Label("Balance: $" + player.getBalance());
 
-        playerInfo.getChildren().addAll(playerNameLabel, balanceLabel);
+        playerInfo.getChildren().addAll(balanceLabel);
         root.setBottom(playerInfo);
         BorderPane.setMargin(playerInfo, new Insets(20, 0, 0, 0));
 
