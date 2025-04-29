@@ -18,6 +18,17 @@ public class Casino extends Application {
 
     @Override
     public void start(Stage mainStage) throws IOException {
+        this.mainStage = mainStage;
+        this.player = new Player("Player", 1000);
+
+        casinoHubScene();
+
+        mainStage.setTitle("Casino");
+        mainStage.setScene(hub);
+        mainStage.show();
+    }
+
+    private void casinoHubScene() {
 
     }
 
