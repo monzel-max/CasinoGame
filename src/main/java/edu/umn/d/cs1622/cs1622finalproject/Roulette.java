@@ -44,6 +44,7 @@ public class Roulette extends CasinoGame {
         titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 
         balanceLabel = new Label("Balance: $" + player.getBalance());
+        balanceLabel.setFont(Font.font("Arial", 16));
 
         resultLabel = new Label("Place your bet!");
         resultLabel.setFont(Font.font("Arial", FontWeight.BOLD, 16));
