@@ -16,6 +16,6 @@ public class NumberBet extends RouletteBet{
 
     @Override
     public int getPayoutMultiplier() {
-        return 35;
+        return 35; // 35 to 1 payout
     }
 }
