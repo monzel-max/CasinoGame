@@ -122,7 +122,7 @@ public class Roulette extends CasinoGame {
             Button btn = new Button(String.valueOf(i));
             btn.setPrefWidth(50);
 
-            // Set button color based on roulette rules (black for evens, red for odds)
+            // Simple red and black colors (not the actual board colors)
             if (i % 2 == 0) {
                 btn.setStyle("-fx-background-color: black; -fx-text-fill: white;");
             } else {
