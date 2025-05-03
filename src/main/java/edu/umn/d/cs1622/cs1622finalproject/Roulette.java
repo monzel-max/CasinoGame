@@ -19,18 +19,43 @@ import javafx.util.Duration;
 
 import java.util.Random;
 
+/**
+ * Represents the Roulette game in the casino.
+ * This class extends CasinoGame to implement the specific logic and UI for Roulette.
+ */
 public class Roulette extends CasinoGame {
+    /** Random number generator for determining the roulette outcome */
     private Random random = new Random();
+
+    /** Label displaying the result of the spin and bet */
     private Label resultLabel;
+
+    /** Label displaying the player's current balance */
     private Label balanceLabel;
+
+    /** Text field for entering the bet amount */
     private TextField betAmtField;
+
+    /** The number selected by the player for betting */
     private int selectedNumber = -1;
+
+    /** Circle shape representing the roulette wheel */
     private Circle wheel;
 
+    /**
+     * Constructs a new Roulette game with the specified player.
+     *
+     * @param player The player who will be playing the game
+     */
     public Roulette(Player player) {
         super(player);
     }
 
+    /**
+     * Creates and returns the main scene for the Roulette game.
+     *
+     * @return The JavaFX scene for the Roulette game
+     */
     @Override
     public Scene gameScene() {
         BorderPane root = new BorderPane();
@@ -93,7 +118,11 @@ public class Roulette extends CasinoGame {
         return new Scene(root, 600, 700);
     }
 
-    // The 0-36 Betting grid full of buttons to bet (Cant do anything besides singular bets currently)
+    /**
+     * Creates the grid of buttons representing the roulette betting area.
+     *
+     * @return A GridPane containing buttons for all numbers on the roulette wheel
+     */
     private GridPane createBettingGrid() {
         GridPane grid = new GridPane();
         grid.setHgap(5);
@@ -143,6 +172,10 @@ public class Roulette extends CasinoGame {
         return grid;
     }
 
+    /**
+     * Handles the spinning of the roulette wheel when the player clicks the spin button.
+     * Validates the bet, deducts it from the player's balance, and initiates the wheel animation.
+     */
     private void spinWheel() {
         if (selectedNumber == -1) {
             resultLabel.setText("Please select a number first!");
@@ -178,6 +211,12 @@ public class Roulette extends CasinoGame {
         }
     }
 
+    /**
+     * Calculates and processes the result of the wheel spin.
+     * Determines if the player won or lost and updates their balance accordingly.
+     *
+     * @param betAmount The amount that was bet
+     */
     private void calculateWinLoss(int betAmount) {
         //Random number simulating 0-36 on the roulette table
         int result = random.nextInt(37);
@@ -193,4 +232,5 @@ public class Roulette extends CasinoGame {
         balanceLabel.setText("Balance: $" + player.getBalance());
     }
 }
+
 

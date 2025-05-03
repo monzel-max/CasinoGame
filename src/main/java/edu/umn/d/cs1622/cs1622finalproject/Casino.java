@@ -1,3 +1,6 @@
+/*
+ * Casino.java
+ */
 package edu.umn.d.cs1622.cs1622finalproject;
 
 import javafx.application.Application;
@@ -15,15 +18,33 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * The main casino application class that extends JavaFX Application.
+ * This class serves as the hub for the casino application,
+ * initializing the player and managing navigation between different games.
+ *
+ * @author Max Monzel
+ */
 public class Casino extends Application {
     private Player player;
     private Stage mainStage;
     private Scene hub;
 
+    /**
+     * Main method that launches the JavaFX application.
+     *
+     * @param args Command line arguments
+     */
     public static void main(String[] args) {
         launch();
     }
 
+    /**
+     * Initializes the application, creates a player with $1000,
+     * and displays the casino hub scene.
+     *
+     * @param mainStage The primary stage for this application
+     */
     @Override
     public void start(Stage mainStage) {
         //Starts the player off at the casino scene and with $1000
@@ -37,6 +58,10 @@ public class Casino extends Application {
         mainStage.show();
     }
 
+    /**
+     * Creates the main hub scene of the casino where the player
+     * can select different games to play.
+     */
     private void casinoHubScene() {
         BorderPane root = new BorderPane();
         root.setPadding(new Insets(20));
@@ -80,6 +105,10 @@ public class Casino extends Application {
 
         hub = new Scene(root, 500, 400);
     }
+
+    /**
+     * Opens the Roulette game scene and adds a button to return to the hub.
+     */
     private void openRouletteGame() {
         Roulette roulette = new Roulette(player);
         Scene rouletteScene = roulette.gameScene();
@@ -100,5 +129,4 @@ public class Casino extends Application {
         mainStage.setScene(rouletteScene);
         mainStage.setTitle("Roulette");
     }
-
 }
